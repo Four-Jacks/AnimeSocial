@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anime Social</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {% for anime in object_list %}
+
+            {% if anime.status == 0 %}
+                <li>
+                    {{ anime.title }}, Airing
+                </li>
+            {% elif anime.status == 1 %}
+                <li>
+                    {{ anime.title }}, Complete
+                </li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+</body>
+</html>
