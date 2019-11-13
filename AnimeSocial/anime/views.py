@@ -19,3 +19,5 @@ class SearchResultsView(ListView):
             Q(title__icontains=query)
         )
         return object_list
+
+#Test
