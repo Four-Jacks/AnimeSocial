@@ -5,9 +5,12 @@
     <title>Anime Social</title>
 </head>
 <body>
-    <h1>Home Page</h1>
-   <form action="{% url 'search_results' %}" method="get">
-        <input name="q" type="text" placeholder="search for anime title">
+    <h1>Anime</h1>
+    <form method="get">
+        {%  csrf_token %}
+        {{ anime.form.as_p }}
+        <button type="submit">Submit</button>
     </form>
+
 </body>
 </html>

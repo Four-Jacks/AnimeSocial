@@ -1,11 +1,9 @@
 from django.urls import path, include
-from .views import AnimeView, SearchResultsView, animeTest
+from .views import AnimeView, SearchResultsView
 
 app_name = 'anime'
 
 urlpatterns = [
-    #path('search/', SearchResultsView.as_view(), name='search_results'),
-    #path('anime/', AnimeView.as_view(), name='home'),
-    #path('', SearchResultsView.as_view(), name='search_reuslts')
-    path('anime/', animeTest)
+    path('search/', SearchResultsView.as_view(), name='search_results'),
+    path('', AnimeView.as_view(), name='anime'),
 ]
