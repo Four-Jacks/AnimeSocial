@@ -19,6 +19,9 @@ class Anime(models.Model):
     def __str__(self):
         return self.title
 
+   # def get_anime_model(self):
+        #return self
+
 
 SEASON_CHOICES = {
     ('SPRING', 'Spring'),
@@ -32,5 +35,4 @@ SEASON_CHOICES = {
 class Season(models.Model):
     season = models.CharField(max_length=6, choices=SEASON_CHOICES, default='UNKNOWN')
     year = models.CharField(max_length=4, default='0000')
-
 

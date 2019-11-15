@@ -14,10 +14,9 @@ class SearchResultsView(ListView):
     model = Anime
     template_name = 'search_results.html'
 
-    def get_queryset(self, request):
-        form = AnimeForm
+    def get_queryset(self):
         query = self.request.GET.get('q')
         object_list = Anime.objects.filter(
             Q(title__icontains=query)
         )
-        return render(request, self.template_name, object_list, {'form': form})
+        return object_list

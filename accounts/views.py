@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.contrib.auth.models import User
 from django.views import View
 
@@ -13,9 +12,7 @@ from django.contrib.auth import (
 from .forms import UserLoginForm, UserRegisterForm
 
 
-class LoginView(View):
-
-    def get(self, request):
+def login_view(request):
         next = request.GET.get('next')
         form = UserLoginForm(request.POST or None)
         if form.is_valid():
@@ -55,7 +52,7 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('/search')
 
 
 def view_profile(request, pk=None):
