@@ -1,11 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-#from anime.models import Anime
+from anime.models import Anime
 
-'''
-Anime = get_anime_model()
-'''
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -23,14 +20,41 @@ class UserProfile(models.Model):
 
     post_save.connect(create_profile, sender=User)
 
-'''
-class AddedAnime(models.Model):
-    user = models.ForeignKey(UserProfile, related_name='anime_membership', on_delete=models.PROTECT)
-    anime = models.ForeignKey(Anime, related_name='anime_list', on_delete=models.PROTECT)
 
-    def __str__(self):
-        return self.anime.name
+class UserAnime(models.Model):
+    anime = models.ManyToManyField(Anime)
+    current_anime = models.ForeignKey(User, related_name='owner', null=True, on_delete=models.PROTECT)
 
-    class Meta:
-        unique_together = ('user', 'anime')
-'''
+    @classmethod
+    def add_anime(cls, current_anime, added_anime):
+        anime, added = cls.objects.get_or_create(
+            current_anime=current_anime
+        )
+        anime.users.add(added_anime)
+
+    @classmethod
+    def remove_anime(cls, current_anime, added_anime):
+        anime, added = cls.objects.get_or_create(
+            current_anime=current_anime
+        )
+        anime.users.remove(added_anime)
+
+
+class UserFriend(models.Model):
+    friend = models.ManyToManyField(User)
+    current_user = models.ForeignKey(User, related_name='has_friend', null=True, on_delete=models.PROTECT)
+
+    @classmethod
+    def remove_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    @classmethod
+    def lose_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.remove(new_friend)
+
