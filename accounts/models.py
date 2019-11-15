@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 #from anime.models import Anime
 
-
-#Anime = get_anime_model()
-
+'''
+Anime = get_anime_model()
+'''
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -23,5 +23,14 @@ class UserProfile(models.Model):
 
     post_save.connect(create_profile, sender=User)
 
+'''
+class AddedAnime(models.Model):
+    user = models.ForeignKey(UserProfile, related_name='anime_membership', on_delete=models.PROTECT)
+    anime = models.ForeignKey(Anime, related_name='anime_list', on_delete=models.PROTECT)
 
-########     unique_together = ('user', 'anime')
+    def __str__(self):
+        return self.anime.name
+
+    class Meta:
+        unique_together = ('user', 'anime')
+'''

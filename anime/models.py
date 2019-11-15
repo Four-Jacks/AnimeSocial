@@ -18,10 +18,10 @@ class Anime(models.Model):
 
     def __str__(self):
         return self.title
-
-   # def get_anime_model(self):
-        #return self
-
+'''
+    def get_anime_model(self):
+        return self
+'''
 
 SEASON_CHOICES = {
     ('SPRING', 'Spring'),
