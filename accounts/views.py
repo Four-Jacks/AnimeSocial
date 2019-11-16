@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.views import View
+from anime.models import Anime
+from accounts.models import UserAnime, UserFriend
 
 from django.contrib.auth import (
     authenticate,
@@ -56,11 +58,32 @@ def logout_view(request):
 
 
 def view_profile(request, pk=None):
+    anime = UserAnime.objects.get(current_anime=request.user)
+    animes = anime.anime.all()
+
+    friend = UserFriend.objects.get(current_user=request.user)
+    friends = friend.friend.all()
     if pk:
         user = User.objects.get(pk=pk)
     else:
         user = request.user
-    args = {'user': user}
+    args = {'user': user, 'animes': animes, 'friends': friends}
     return render(request, 'profile.html', args)
 
 
+def change_anime(request, operation, pk):
+    new_anime = Anime.objects.get(pk=pk)
+    if operation == 'add':
+        UserAnime.add_anime(request.user, new_anime)
+    elif operation == 'remove':
+        UserAnime.remove_anime(request.user, new_anime)
+    return redirect('/')
+
+
+def change_friend(request, operation, pk):
+    new_friend = User.objects.get(pk=pk)
+    if operation == 'add':
+        UserAnime.add_anime(request.user, new_friend)
+    elif operation == 'remove':
+        UserAnime.remove_anime(request.user, new_friend)
+    return redirect('/')

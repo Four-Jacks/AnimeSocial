@@ -6,7 +6,18 @@
     <p>status: {{ user.userprofile.status }}</p>
     <p>favorite anime: {{ user.userprofile.favorite_anime }}</p>
     <p>Status form userprofile: {{ user.userprofile.status }}</p>
-    <!-- if user.userprofile.image -->
-    <!-- user.userprofile.image.url -->
+
+
+
+    <h1>Anime</h1>
+    {% for anime in animes %}
+            <img alt="anime poster" src="{{ anime.img_url }}" width="100" height="140"> {{ anime.title }}
+        </a>
+    {% endfor %}
+
+    <h1>Friends</h1>
+    {% for friend in friends %}
+       <h2>{{ friend.username }}</h2>
+    {% endfor %}
 
 </div>

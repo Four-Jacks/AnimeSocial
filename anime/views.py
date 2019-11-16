@@ -5,7 +5,7 @@ from .models import Anime
 from anime.forms import AnimeForm
 
 
-# Create your views here.
+
 class AnimeView(TemplateView):
     template_name = 'home.html'
 

@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Anime(models.Model):
+    objects = models.Manager()
     title = models.CharField(max_length=256)
     title_jap = models.CharField(max_length=256, null=True, blank=True, default='N/A')
     img_url = models.CharField(max_length=256, null=True, blank=True, default='https://i.pinimg.com/originals/11/ea/01/11ea01854b381fa350ca6ed8c77fe13b.png')
