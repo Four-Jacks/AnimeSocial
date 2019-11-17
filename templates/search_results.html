@@ -5,21 +5,20 @@
 
 {% block content %}
   <h1>Search Results</h1>
-<div class="container-fluid padding col-lg-7 col-md-9 col-xl-6">
-
   <!--- Search results -->
-    <div class="row affix">
-      <div class="col">
-        <ul class="list-group">
-              {% for anime in object_list %}
-              <li class="list-group-item" align="center">
-                    <p>{{ anime.title }}</p>
-                    <img alt="anime poster" src="{{ anime.img_url }}" width="100" height="140">
-              </li>
-              {% endfor %}
-        </ul>
-      </div>
-    </div>
-</div>
+  <div class="container-fluid">
+       <div class="row affix">
+         {% for anime in object_list %}
+         <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 border border-secondary">
+               <div style="padding-top:20px;" align="center">
+                   <p>{{ anime.title }}</p>
+               </div>
+               <div style="padding-bottom:20px;" align="center">
+                   <a href="{% url 'anime:anime_detail' pk=anime.id %}"><img src="{{ anime.img_url }}" width="100" height="140"></a>
+               </div>
+          </div>
+             {% endfor %}
+       </div>
+   </div>
   <!--- End of friends-->
 {% endblock %}
