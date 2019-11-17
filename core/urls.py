@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from accounts.views import login_view, logout_view, register_view, view_profile, change_anime, change_friend
 
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view),
@@ -25,10 +27,9 @@ urlpatterns = [
     path('profile/', view_profile),
     path('search/', include('anime.urls')),
     path('posts/', include('posts.urls')),
-    path('', view_profile),
-
+    path('', include('anime.urls')),
+    path('logout/',auth_views.LogoutView.as_view()),
 
     re_path(r'update/(?P<operation>.+)/(?P<pk>\d+)', change_anime, name='change_anime'),
     re_path(r'connect/(?P<operation>.+)/(?P<pk>\d+)', change_friend, name='change_friend')
-
 ]
