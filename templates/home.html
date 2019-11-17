@@ -2,46 +2,32 @@
 
 {% block title %}
 <title>Anime Social</title>
-    <style>
-        .wrapper-out{
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-auto-rows: 140px;
-            grid-gap: 1em;
-        }
-        .wrapper-out > div {
-            background: #dddddd;
-        }
-
-        .wrapper-in{
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-        }
-    </style>
 {% endblock %}
 
 
 {% block content %}
 
-<h1>Anime</h1>
 {% if user.is_authenticated %}
 <h3> Welcome {{ user|title }} </h3>
 {% endif %}
 
-    <h2>Fall 2019</h2>
-    <div class="wrapper-out">
-        {% for anime in object_list %}
-
-            <div class="wrapper-in">
-                <div>
-                    <a href="{% url 'anime:anime_detail' pk=anime.id %}"><img src="{{ anime.img_url }}" width="100" height="140"></a>
-                </div>
-                <div>
-                    <p style="font-size: 16pt">{{ anime.title }}</p>
-                </div>
+<h2>Fall 2019</h2>
+    <div class="container-fluid">
+         <div class="row affix">
+           {% for anime in object_list %}
+           <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 border border-secondary">
+                 <div style="padding-top:20px;" align="center">
+                     <a href="{% url 'anime:anime_detail' pk=anime.id %}"><img src="{{ anime.img_url }}" width="100" height="140"></a>
+                 </div>
+                 <div style="padding-bottom:0px;" align="center">
+                     <p style="font-size: 16pt">{{ anime.title }}</p>
+                 </div>
             </div>
+               {% endfor %}
+         </div>
+     </div>
 
-        {% endfor %}
-    </div>
+
+
 
 {% endblock %}
