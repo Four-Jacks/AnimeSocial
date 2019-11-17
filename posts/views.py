@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from accounts.models import UserAnime, UserFriend
 
 # Create your views here.
 
@@ -9,4 +10,9 @@ from django.views import View
 class PostView(View):
 
     def get(self, request):
-        return render(request, 'posts.html')
+        friend = UserFriend.objects.get(current_user=request.user)
+        friends = friend.friend.all()
+
+        user = request.user
+        args = {'user': user, 'friends': friends}
+        return render(request, 'posts.html', args)
