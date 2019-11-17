@@ -77,10 +77,10 @@
 
 <!--- Friends -->
 <div class="container-fluid padding col-lg-2 col-md-3 col-xs-12 col-sm-12 col-xl-2">
-    <h3 align="center">Friends</h3>
      <div class="row affix">
        <div class="col">
            <ul class="list-friends">
+             <h3>Friends</h3>
              {% for friend in friends %}
               <li class="list-group-item">{{ friend.username|title }}</li>
               {% endfor %}
