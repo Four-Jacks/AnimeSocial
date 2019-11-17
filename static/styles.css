@@ -1,0 +1,23 @@
+.navbar {
+    padding: .8rem !important;
+    background-color:#0af7d0;
+}
+
+.nav-link {
+  font-size: 1.1em !important;
+  color:#000000 !important;
+}
+
+.body {
+  background-color:#52fade;
+}
+
+.list-group-item {
+  background-color:#52fade !important;
+}
+
+
+.footer {
+  background-color:#0af7d0;
+  color:#000000;
+}
