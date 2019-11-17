@@ -1,6 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
+{% block title %}
+<title>Sign up</title>
+{% endblock %}
+
+
+
+{% block content %}
+{% load bootstrap4 %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +18,8 @@
 <body>
     <form method="POST">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" />
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-primary" value="Sign up">
     </form>
 </body>
-
-</html>
+{% endblock %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'anime.apps.AnimeConfig',
     'accounts.apps.AccountsConfig',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Anime Social</title>
-</head>
-<body>
-    <h1>Anime</h1>
-    <form action="{% url 'anime:search_results' %}" method="get">
-        <input name="q" type="text" placeholder="search for anime title">
-    </form>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+<title>Anime Social</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Anime</h1>
+{% if user.is_authenticated %}
+<h3> Welcome {{ user|title }} </h3>
+{% endif %}
+
+{% endblock %}
