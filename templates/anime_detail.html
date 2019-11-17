@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anime Social</title>
+</head>
+<body>
+
+    <form action="{% url 'anime:search_results' %}" method="get">
+        <input name="q" type="text" placeholder="search for anime title">
+    </form>
+
+    <h1>{{ object.title }}</h1>
+    <img src="{{ object.img_url }}" width="200" height="260">
+    <p style="max-width: 1000px; word-wrap: break-word">{{ object.synopsis }}</p>
+    <h2>title english: {{ object.title_eng }}</h2>
+    <h2>type: {{ object.type }}</h2>
+    <h2>premiered: {{ object.season }}</h2>
+    <h2>status: {{ object.status }}</h2>
+    <h2>air date: {{ object.air_date }}</h2>
+</body>
+</html>
