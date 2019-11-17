@@ -3,6 +3,10 @@
     background-color:#0af7d0;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #FFFFFF;
+}
+
 .nav-link {
   font-size: 1.1em !important;
   color:#000000 !important;
