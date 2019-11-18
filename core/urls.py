@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from accounts.views import login_view, logout_view, register_view, view_profile, change_anime, change_friend
+from accounts.views import (login_view,
+                            logout_view,
+                            register_view,
+                            view_profile,
+                            change_anime,
+                            change_friend,
+                            view_friend)
 
 from django.contrib.auth import views as auth_views
 
@@ -29,6 +35,8 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('', include('anime.urls')),
     path('logout/',auth_views.LogoutView.as_view()),
+
+    path('profile/<int:pk>/', view_friend, name='friend_view'),
 
     re_path(r'update/(?P<operation>.+)/(?P<pk>\d+)', change_anime, name='change_anime'),
     re_path(r'connect/(?P<operation>.+)/(?P<pk>\d+)', change_friend, name='change_friend')
