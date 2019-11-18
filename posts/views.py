@@ -10,8 +10,11 @@ from accounts.models import UserAnime, UserFriend
 class PostView(View):
 
     def get(self, request):
-        friend = UserFriend.objects.get(current_user=request.user)
-        friends = friend.friend.all()
+        try:
+            friend = UserFriend.objects.get(current_user=request.user)
+            friends = friend.friend.all()
+        except UserFriend.DoesNotExist:
+            friends = None
 
         user = request.user
         args = {'user': user, 'friends': friends}

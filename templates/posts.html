@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Friends</h1>
     <form method="post">
-        <input type="text" placeholder="Search friends">
+        <input type="text" placeholder="Search friends" style="background-color:#696969;color:#FFFFFF">
     </form>
     <h2>Might change this from friends to users?</h2>
 <div class="container">
@@ -18,7 +18,6 @@
             {% for friend in friends %}
              <li class="list-group-item">{{ friend.username|title }}</li>
              {% endfor %}
-             <li class="list-group-item">Testing</li>
            </ul>
         </div>
       </div>
