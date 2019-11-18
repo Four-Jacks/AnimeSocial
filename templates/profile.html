@@ -63,12 +63,12 @@
 
 <!--- Friends  style="overflow: auto" can make friends list scrollable-->
 <div class="container-fluid col-lg-2 col-md-2 col-xs-2 col-sm-10 col-xl-2">
+   <h3 align="center">Friends</h3>
      <div class="row affix">
        <div class="col">
            <ul class="list-friends" style="overflow:auto;max-height: 450px;padding-top:20px;">
-             <h3 align="center">Friends</h3>
              {% for friend in friends %}
-              <li class="list-group-item"><a href="{% url 'friend_view' pk=friend.id %}">{{ friend.username }}</a></li>
+              <li class="list-group-item"><a href="{% url 'friend_view' pk=friend.id %}">{{ friend.username|title }}</a></li>
               {% endfor %}
             </ul>
         </div>

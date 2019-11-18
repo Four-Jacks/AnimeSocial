@@ -22,8 +22,20 @@
             </ul>
         </div>
      </div>
+     <a href="{% url 'change_friend' operation='remove' pk=user.id %}"
+       class='btn btn-warning'><span
+       class='glyphicon glyphicon-remove-circle'></span>Remove Friend</a>
+
+       <a href="{% url 'change_friend' operation='add' pk=user.id %}"
+         class='btn btn-warning'><span
+         class='glyphicon glyphicon-remove-circle'></span>Add Friend</a>
  </div>
  <!--- End of profile column -->
+
+
+
+
+
 
 <!--- Top 5 section -->
 <div class="container-fluid padding ml-auto">
