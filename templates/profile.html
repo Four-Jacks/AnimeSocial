@@ -43,7 +43,9 @@
 <!--- Top 5 section -->
 <div class="container-fluid align-self-center padding ml-auto">
   <hr class="my-4">
-<h3 align="center">Your top 5</h3>
+<h3 align="center">Your Anime</h3>
+
+
 <div class="row text-center padding">
 	<div class="col-12 col-sm-4 col-md col-lg">
 			<i class="fas fa-code"></i>
@@ -83,7 +85,7 @@
            <ul class="list-friends" style="overflow:auto;max-height: 450px;padding-top:20px;">
              <h3 align="center">Friends</h3>
              {% for friend in friends %}
-              <li class="list-group-item">{{ friend.username|title }}</li>
+              <li class="list-group-item"><a href="{% url 'friend_view' pk=friend.id %}">{{ friend.username }}</a></li>
               {% endfor %}
             </ul>
         </div>

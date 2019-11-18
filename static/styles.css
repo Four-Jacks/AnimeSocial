@@ -7,6 +7,10 @@
   color: #505050;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #FFFFFF;
+}
+
 .nav-link {
   font-size: 1.1em !important;
   color:#FFFFFF !important;
