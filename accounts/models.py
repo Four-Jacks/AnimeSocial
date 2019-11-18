@@ -1,39 +1,62 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from anime.models import Anime
 
-# Create your models here.
 
-
-class Anime(models.Model):
-    objects = models.Manager()
-    title = models.CharField(max_length=256)
-    title_jap = models.CharField(max_length=256, null=True, blank=True, default='N/A')
-    img_url = models.CharField(max_length=256, null=True, blank=True, default='https://i.pinimg.com/originals/11/ea/01/11ea01854b381fa350ca6ed8c77fe13b.png')
-    type = models.CharField(max_length=5, null=True, blank=True, default='N/A')
-    season = models.CharField(max_length=11, null=True, blank=True, default='N/A')
-    status = models.CharField(max_length=16, null=True, blank=True, default='N/A')
-    air_date = models.CharField(max_length=32, null=True, blank=True, default='N/A')
-    synopsis = models.TextField(null=True, blank=True, default="N/A")
-
-    class Meta:
-        verbose_name_plural = 'anime'
+# Creates a user profile object for user preferences
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, default='')
+    favorite_anime = models.CharField(max_length=100, default='')
 
     def __str__(self):
-        return self.title
-'''
-    def get_anime_model(self):
-        return self
-'''
+        return self.user.username
 
-SEASON_CHOICES = {
-    ('SPRING', 'Spring'),
-    ('SUMMER', 'Summer'),
-    ('FALL', 'Fall'),
-    ('WINTER', 'Winter'),
-    ('UNKNOWN', 'Unknown')
-}
+    def create_profile(sender, **kwargs):
+        if kwargs['created']:
+            user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+    post_save.connect(create_profile, sender=User)
 
 
-class Season(models.Model):
-    season = models.CharField(max_length=6, choices=SEASON_CHOICES, default='UNKNOWN')
-    year = models.CharField(max_length=4, default='0000')
+# Creates anime to user relationships
+class UserAnime(models.Model):
+    objects = models.Manager()
+    anime = models.ManyToManyField(Anime)
+    current_anime = models.ForeignKey(User, related_name='owner', null=True, on_delete=models.PROTECT)
 
+    @classmethod
+    def add_anime(cls, current_anime, added_anime):
+        anime, added = cls.objects.get_or_create(
+            current_anime=current_anime
+        )
+        anime.users.add(added_anime)
+
+    @classmethod
+    def remove_anime(cls, current_anime, added_anime):
+        anime, added = cls.objects.get_or_create(
+            current_anime=current_anime
+        )
+        anime.users.remove(added_anime)
+
+
+# Creates user to user relationships(aka friends)
+class UserFriend(models.Model):
+    objects = models.Manager()
+    friend = models.ManyToManyField(User)
+    current_user = models.ForeignKey(User, related_name='has_friend', null=True, on_delete=models.PROTECT)
+
+    @classmethod
+    def add_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    @classmethod
+    def remove_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.remove(new_friend)
