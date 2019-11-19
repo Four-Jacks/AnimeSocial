@@ -66,7 +66,7 @@ def view_profile(request, pk=None):
 
     try:
         friend = UserFriend.objects.get(current_user=request.user)
-        friends = friend.friend.all()
+        friends = friend.friend.all().order_by('username')
     except UserFriend.DoesNotExist:
         friends = None
 
@@ -74,6 +74,7 @@ def view_profile(request, pk=None):
         user = User.objects.get(pk=pk)
     else:
         user = request.user
+
     args = {'user': user, 'animes': animes, 'friends': friends}
     return render(request, 'profile.html', args)
 
@@ -110,7 +111,7 @@ def view_friend(request, pk=None):
 
     try:
         friend = UserFriend.objects.get(current_user=user)
-        friends = friend.friend.all()
+        friends = friend.friend.all().order_by('username')
     except UserFriend.DoesNotExist:
         friends = None
 
