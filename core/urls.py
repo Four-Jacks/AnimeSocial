@@ -30,7 +30,7 @@ urlpatterns = [
     path('login/', login_view),
     path('register/', register_view),
     path('logout/', logout_view),
-    path('profile/', view_profile),
+    path('profile/', include('accounts.urls')),
     path('search/', include('anime.urls')),
     path('posts/', include('posts.urls')),
     path('', include('anime.urls')),

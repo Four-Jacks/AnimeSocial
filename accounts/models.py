@@ -7,8 +7,9 @@ from anime.models import Anime
 # Creates a user profile object for user preferences
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=100, default='')
-    favorite_anime = models.CharField(max_length=100, default='')
+    status = models.CharField(max_length=256, default='I love anime')
+    avatar = models.CharField(max_length=256, default='https://thehaletelescope.com/wp-content/uploads/2018/10/weeb.jpg')
+    favorite_anime = models.CharField(max_length=256, default='Cowboy Bebop')
 
     def __str__(self):
         return self.user.username

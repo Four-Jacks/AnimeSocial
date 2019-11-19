@@ -3,7 +3,7 @@ from django.contrib.auth import (
     authenticate,
     get_user_model
 )
-
+from .models import UserProfile
 
 User = get_user_model()
 
@@ -51,3 +51,17 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError(
                 "This email has already been registered")
         return super(UserRegisterForm, self).clean(*args, **kwargs)
+
+
+class EditProfileForm(forms.ModelForm):
+    status = forms.CharField(max_length=256, label='status message')
+    avatar = forms.CharField(max_length=256, label='image url')
+    favorite_anime = forms.CharField(max_length=256, label='favorite anime')
+
+    class Meta:
+        model = UserProfile
+        fields = [
+            'status',
+            'avatar',
+            'favorite_anime'
+        ]
